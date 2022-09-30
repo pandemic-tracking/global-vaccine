@@ -146,14 +146,20 @@ def main(args_list=None):
     s3 = S3Backup(bucket_name=args.s3_bucket, s3_subfolder=args.s3_subfolder)
 
     merged_df = get_merged_dataframe();
+    file_path = args.temp_dir + '/' + str(datetime.now()).replace(' ','-').replace(':','-').replace('.','-') + '-merged.csv'
+    merged_df.to_csv(file_path) 
+    
+    # upload to S3
+    s3.upload_file(file_path, "merged")
+    logger.info('Uploaded merged file to S3')
 
     comparison_df = get_comparison_dataframe(merged_df);
-    file_path = args.tempdir + '/' + str(datetime.now()).replace(' ','-').replace(':','-').replace('.','-') + '-out.csv'
+    file_path = args.temp_dir + '/' + str(datetime.now()).replace(' ','-').replace(':','-').replace('.','-') + '-comparison.csv'
     comparison_df.to_csv(file_path) 
 
     # upload to S3
     s3.upload_file(file_path, "comparison")
-    logger.info('Uploaded S3')
+    logger.info('Uploaded comparison file to S3')
 
 if __name__ == "__main__":
     main()
