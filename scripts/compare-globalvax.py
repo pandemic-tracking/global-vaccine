@@ -1,4 +1,4 @@
-""" Script that runs through validated manual screenshots in Airtable and uploads them to S3. """
+""" Script that fetches OWID and WHO vaccine administration data, merges it, compares it and uploads the results to S3. """
 
 import os
 import re
@@ -36,7 +36,7 @@ parser.add_argument(
     help='Name of subfolder on S3 bucket to upload files to')
 
 parser.add_argument('--push-to-s3', dest='push_to_s3', action='store_true', default=False,
-    help='Push screenshots to S3')
+    help='Push data to S3')
 
 
 def get_merged_dataframe():
