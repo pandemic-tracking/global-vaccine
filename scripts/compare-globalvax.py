@@ -27,12 +27,12 @@ parser.add_argument(
 
 parser.add_argument(
     '--s3-bucket',
-    default='covid-data-archive',
+    default='pandemic-tracking-collective-data',
     help='S3 bucket name')
 
 parser.add_argument(
     '--s3-subfolder',
-    default='state_screenshots',
+    default='globalvax',
     help='Name of subfolder on S3 bucket to upload files to')
 
 parser.add_argument('--push-to-s3', dest='push_to_s3', action='store_true', default=False,
@@ -148,7 +148,7 @@ def main(args_list=None):
     merged_df = get_merged_dataframe();
 
     comparison_df = get_comparison_dataframe(merged_df);
-    file_path = args.temp_dir + '/' + str(datetime.now()).replace(' ','-').replace(':','-').replace('.','-') + '-out.csv'
+    file_path = args.tempdir + '/' + str(datetime.now()).replace(' ','-').replace(':','-').replace('.','-') + '-out.csv'
     comparison_df.to_csv(file_path) 
 
     # upload to S3
