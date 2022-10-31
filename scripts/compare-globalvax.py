@@ -67,7 +67,7 @@ def get_merged_dataframe():
     merged_data = pd.merge(latest_owid_data,who_data, how='inner', left_on='iso_code', right_on='ISO3').drop(columns=[
         'WHO_REGION','TOTAL_VACCINATIONS_PER100', 'PERSONS_VACCINATED_1PLUS_DOSE_PER100','PERSONS_FULLY_VACCINATED_PER100',
         'VACCINES_USED', 'FIRST_VACCINE_DATE', 'NUMBER_VACCINES_TYPES_USED', 'PERSONS_BOOSTER_ADD_DOSE_PER100',
-        'PERSONS_BOOSTER_ADD_DOSE','PERSONS_VACCINATED_1PLUS_DOSE','PERSONS_FULLY_VACCINATED','people_vaccinated'
+        'PERSONS_BOOSTER_ADD_DOSE','PERSONS_VACCINATED_1PLUS_DOSE','people_vaccinated'
         ])
     merged_data.rename(columns = {'date':'owid_date','DATE_UPDATED':'WHO_DATE',
     'total_vaccinations':'owid_total_vaccinations',
